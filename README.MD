@@ -4,7 +4,7 @@
 
 > `Traer todos los elementos que existan en A `,donde nos aseguremos que  no existan en en la tabla  B.
 
-> Ejem: Tenemos 2 categorias que se solapan : Equipos de computo y electronica , `necesito solo necesito los productos de electronica `que no tengan que ver con computo.
+> Ejem: Tenemos 2 categorias que se solapan : Equipos de computo y electronica , `necesito solo los productos de electronica `que no tengan que ver con computo.
 
 ### **Exclusive Right Join**
 ![](./img/exclusiveRightJoin.png)
@@ -25,7 +25,10 @@
 > 2. Tra a todos los usuarios que  `contengan "Is_ael"`(- comodin que indica que ese espacio puede variar ejem: **`Is`m`ael`**, **`Is`r`ael`**)
 > 3. traer todas las cadenas que no tengan este patron `Is_ael`.
 
-### **Inices**
+### ORDER BY 
+>    - `las cadenas` las ordena de manera alfabetica
+
+### **Indices**
 > Cuando hay campos muy complejos , en donde  se requiere ordenar por fecha,precio y ademas nombre. Volviendose un indice complicado.
 
 > Para evitar ello se utilizan los `Indices`(se idexan,mapeando cada dato de la columna).
@@ -36,7 +39,7 @@
 
 > - Es recomendable usarlo  en tablas donde se  realizan muchas busquedas , ucarlas en el Join o en el Order By .
 
-> - Cuidar para alta transaccionabilidad.(`No es bueno tener inices en tablas donde se realizan muchas inserciones o actualizaciones`).
+> - Cuidar para alta transaccionabilidad.(`No es bueno tener indices en tablas donde se realizan muchas inserciones o actualizaciones`).
 
 ### **Agregacion | Group By**
 
@@ -60,6 +63,25 @@ GROUP BY marca;
      - Suma los precios y saca el promedio  de los precios de cada uno de los grupos y te los muestra: Asus: 40, HP: 20 ,Lennovo:50
 - Con el `Gruop By` indicas con que `criterio se armaran los grupos`.
 - Con el `select` indicas que es `lo quieres saber de los grupos formados`(suma,promedio,etc).
+
+### **Limitantes**
+> - **LIMIT**
+```
+SELECT*
+FROM tabla_diaria
+LIMIT 1500;
+```
+>    - **`OFFSET`**: Complemento de LIMIT, `indica  el salto apartir de cual se iniciara la cuenta`.
+```
+/**Inicas que la cuenta iniciar despues de los  primeros 1500 registro(que efectue un salto)**/
+SELECT*
+FROM tabla_diaria
+OFFET 1500
+LIMIT 1500
+```
+
+
+
 
 
 
