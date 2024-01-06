@@ -22,7 +22,7 @@
 ### **LIKE**
 ![](./img/like.png)
 > 1. Trae todos los elementos que `empiezen con Is%`(% indica que despues de esa cadena ,puede contener lo que sea)
-> 2. Tra a todos los usuarios que  `contengan "Is_ael"`(- comodin que indica que ese espacio puede variar ejem: **`Is`m`ael`**, **`Is`r`ael`**)
+> 2. Trae a todos los usuarios que  `contengan "Is_ael"`(- comodin que indica que ese espacio puede variar ejem: **`Is`m`ael`**, **`Is`r`ael`**)
 > 3. traer todas las cadenas que no tengan este patron `Is_ael`.
 
 ### ORDER BY 
@@ -79,6 +79,52 @@ FROM tabla_diaria
 OFFET 1500
 LIMIT 1500
 ```
+### **WINDOWS FUNCTION**
+```
+SELECT 
+    ROW_NUMBER OVER() AS row_id,*
+FROM platzi.alumnos
+```
+
+### **EN MIS TIEMPOS**
+
+> Es inportante manejar las fechas adecuadamente utilizando tipos datos ya establecidos como `DATE` O `DATETIME`.
+
+
+***Uso en SELECT***
+##### **EXTRAER PARTES DE UNA FECHA**
+- Option 1: `EXTRACT`
+```
+SELECT EXTRACT(YEAR FROM fecha_incorporacion) AS anio_incorporacion
+FROM platzi.alumnos
+```
+- Option 2: `DATE_PART`
+```
+SELECT DATE_PART('YEAR',fecha_incorporacion) AS anio_incorporacion,
+       DATE_PART('MONTH',fecha_incorporacion) AS mes_incorporacion,
+	   DATE_PART('DAY',fecha_incorporacion) AS dia_incorporacion
+FROM PLATZI.alumnos
+```
+***Uso en WHERE***
+```
+SELECT *
+FROM PLATZI.alumnos
+WHERE (EXTRACT(YEAR FROM fecha_incorporacion))=2018
+
+
+SELECT*
+FROM PLATZI.alumnos
+WHERE (DATE_PART('YEAR',fecha_incorporacion))=2019
+
+
+SELECT*
+FROM (
+	SELECT *, DATE_PART('YEAR',fecha_incorporacion) AS anio_incorporacion
+	FROM PLATZI.alumnos
+) AS alumnos_con_anio
+WHERE anio_incorporacion =2020
+```
+
 
 
 
