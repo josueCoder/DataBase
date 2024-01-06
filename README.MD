@@ -125,6 +125,48 @@ FROM (
 WHERE anio_incorporacion =2020
 ```
 
+### **SELECTORES DE RANGO**
+Los tipos de rango que vienen en PostgreSQL son:
+
+- `int4range`: Que trae un rango de enteros.
+
+- `int8range:` Es un rango de enteros grandes.
+
+- `numrange:` Es un rango numérico.
+```
+SELECT*
+FROM platzi.alumnos
+WHERE tutor_id in(1,2,3,4)
+
+
+SELECT*
+FROM PLATZI.alumnos
+WHERE tutor_id between 1 and 10
+
+---EVALUA SI EL VALOR ESTA DENTRO DEL RANGO
+SELECT int4range(1,20) @>3;
+
+
+--&& EVALUA LA INTERSECCION
+SELECT numrange(11.1,19.2) && numrange(20.0,30.0)
+
+
+--UPPER/ LOWER RETORNA EL VALOR + ALTO DENTRO DE UN RANGO
+SELECT UPPER(int8range(15,25)) 
+
+--LOS LIMITES SUPERIORES E INFERIORES DE LA INTERSECCION
+SELECT INT4RANGE(10,20)* INT4RANGE(15,25)
+
+--EVALUA SI ES VACIO UN RANGO
+SELECT ISEMPTY(INT4RANGE(1,5))
+
+-- APLICACIÓN
+SELECT*
+FROM PLATZI.alumnos
+WHERE int4range(10,20) @>tutor_id 
+
+```
+
 
 
 
