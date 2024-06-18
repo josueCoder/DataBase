@@ -80,11 +80,45 @@ OFFET 1500
 LIMIT 1500
 ```
 ### **WINDOWS FUNCTION**
+
+**`Row_NUMBER`**: Se utiliza para asignar un numero secuencial unico a las filas dentro de una particion de un conjunto de resultados.
+
+**Ejemplo sin partición**
+Si solo se necesita numerar todas las filas de una tabla, se puede omitir la clausula PARTITION BY.
+
+
+
 ```
 SELECT 
-    ROW_NUMBER OVER() AS row_id,*
+    ROW_NUMBER OVER() AS row_id,columna1, columna2
 FROM platzi.alumnos
 ```
+**Ejemplo sin partición**
+Si se necesita numerar las filas `dentro de un grupo de valores` de una columna especifica, se usa la clausula `PARTITION BY`
+```
+SELECT 
+    columna1,
+    columna2,
+    ROW_NUMBER() OVER (PARTITION BY columna1 ORDER BY columna2) AS RowNum
+FROM 
+    tu_tabla;
+
+```
+**Ejemplo completo**
+```
+SELECT 
+    Departamento,
+    NombreEmpleado,
+    Salario,
+    ROW_NUMBER() OVER (PARTITION BY Departamento ORDER BY Salario DESC) AS RowNum
+FROM 
+    Empleados;
+```
+**`PARTITION BY Departamento`** Agrupa a los empleados por departamento.
+
+**`ORDEN BY Salario DESC`** Ordena a los empleados dentro de cada departamento por salario en orden desendente.
+
+**`ROW_NUMBER()`** Asigna un numero de fila  a cada empleado dentro de su departamento. 
 
 ### **EN MIS TIEMPOS**
 
